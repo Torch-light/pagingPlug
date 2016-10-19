@@ -8,7 +8,7 @@
 	 <pagging model="pageModel" ng-if="isPageTrue"></pagging>
 	</p>
 	<p>
-	在你的控制器第写上
+	在你的控制器里写上
 	 $scope.pageModel = {
                 model: {
                     pageIndex: 1,
@@ -41,4 +41,5 @@
                 vm.cashiers.Summary = obj.jsondata.list;
                 //obj就是你从后台取到的值。
          }
+         
 	</p>
