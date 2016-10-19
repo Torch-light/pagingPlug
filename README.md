@@ -24,7 +24,7 @@
                 headAuth: {
                     Authorization: 'Bearer '
                 }  后台有特殊验证的可以加在这里面,没有则为null
-
+		//这里面的参数名字可以自己更改，但是顺序不能乱。
         };
         第一次调用后台数据时
 	 service.GetSummary(obj).then(function (data) {
@@ -32,7 +32,7 @@
 			$scope.pageModel.alldata=data.jsondata.totalCount;
 			//取到总的页码数,和数据条数，这样分页算出来的才是正确的，不然会是默认值
 			$scope.isPageTrue=true;
-			//设置isPageTrue为true,这个时候才会去加载分页.这个值可以自己配置
+			//设置isPageTrue为true,这个时候才会去加载分页.这个参数名字可以自己配置
       }，
       在你动态改变传给后台的数据模型的时候，记得把
       $scope.pageModel.model里面的值更新,
@@ -41,5 +41,5 @@
                 vm.cashiers.Summary = obj.jsondata.list;
                 //obj就是你从后台取到的值。
          }
-         
+
 	</p>
