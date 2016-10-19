@@ -1,0 +1,55 @@
+/* Empty. Add your own CSS if you like */
+
+
+.pagging-div-warp{
+    width: 100%;
+}
+.pagging-div-warp .ul-warp {
+
+    text-align: center;
+}
+.pagging-div-warp .ul-warp li{
+    border: 1px solid #ccc;
+    padding: 5px;
+    display: inline-block;
+    text-align: center;
+    margin: 0px 2px;
+    border-radius: 5px;
+    text-overflow:ellipsis; 
+	white-space:nowrap; 
+
+    
+}
+.pagging-div-warp .ul-warp li:hover{
+
+background-color: #CAE1FF;
+cursor:pointer;
+}
+.pagging-div-warp .ul-warp .num{
+    width: 40px;
+}
+.pagging-div-warp .ul-warp .active{
+    background-color: #CAE1FF;
+}
+.pagging-div-warp .ul-warp input{
+    width: 40px;
+    padding-left: 5px;
+   
+}
+.pagging-div-warp .ul-warp sure-btn{
+    padding: 4px 5px 4px 5px;
+    color: #fff;
+    background-color:#3A5FCD; 
+    border:none;
+    font-size: 12px;
+    margin-left:10px; 
+    margin-right:10px; 
+}
+.pagging-div-warp .ul-warp .btn{
+    padding: 5px;
+    display: inline-block;
+    text-align: center;
+    margin: 0px 2px;
+    border-radius: 5px;
+   
+}
