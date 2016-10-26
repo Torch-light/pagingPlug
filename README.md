@@ -30,16 +30,36 @@
 	 service.GetSummary(obj).then(function (data) {
 			$scope.pageModel.allpage=data.jsondata.total;  
 			$scope.pageModel.alldata=data.jsondata.totalCount;
-			//取到总的页码数,和数据条数，这样分页算出来的才是正确的，不然会是默认值
+			//取到总的页码数,和数据条数，这样分页算出来的才是正确的，不然会是默认值100
+      if(data.jsondata.length>0)
 			$scope.isPageTrue=true;
-			//设置isPageTrue为true,这个时候才会去加载分页.这个参数名字可以自己配置
+			//设置isPageTrue为true,当有数据的时候才会去加载分页.这个参数名字可以自己配置
       }，
       在你动态改变传给后台的数据模型的时候，记得把
       $scope.pageModel.model里面的值更新,
       在控制器js里面写上
-        $scope.pageCall = function (obj) {
+        $$rootScope.pageCall = function (obj) {
                 vm.cashiers.Summary = obj.jsondata.list;
                 //obj就是你从后台取到的值。
          }
+      数据动态改变要更新分页就是把$scope.isPageTrue=false然后在设置为true;
+       $scope.serch = function () {
+                $scope.isPageTrue = false;
+                $scope.pageModel.model.startTime = $scope.model.startTime;
+                $scope.pageModel.model.endTime = $scope.model.endTime;
+                bill.getshift($scope.model).then(function (data) {
+                    if (data.errcode === "I00000") {
+                        $scope.bills = data.jsondata.ChangeShiftShows;
+                    }
+                    if (data.jsondata.ChangeShiftShows.length > 0) {
+                        $scope.pageModel.alldata = data.jsondata.Count;
+                        $scope.pageModel.allpage = Math.ceil(data.jsondata.Count / $scope.pageModel.model.pagesize);
+                        $scope.isPageTrue = true;
+                    } 
 
+                })
+
+        };
+      在公司项目测试过，没问题，有问题的话可以联系我wx:lzcjxxxxxxx.
+      邮箱18573042760@163.com
 	</p>
