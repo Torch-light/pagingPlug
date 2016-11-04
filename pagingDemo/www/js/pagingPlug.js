@@ -1,6 +1,6 @@
   "use strict"
         var pagging = angular.module('pagingPlug', []);
-        pagging.directive('paging', ['$http', '$q', function ($http, $q) {
+        pagging.directive('paging', ['$http', '$q','$rootScope', function ($http, $q,$rootScope) {
             // Runs during compile
             return {
                 restrict: 'E',
@@ -9,12 +9,12 @@
                     model: "="
                 },
                 template: '<div class="pagging-div-warp">' +
-                  '<ul class="ul-warp">' +
+                  '<ul class="ul-warp" ng-if="alldata>0">' +
                   '<button  class="btn" ng-click="page.onePage()" ng-disabled="indexPage==1">首页</button>' +
                   '<button  class="btn" ng-click="page.upPage()" ng-disabled="indexPage==1">上一页</button>' +
                   '<li class="num" ng-class={true:"active",false:"notactive"}[pagging==indexPage]  ng-repeat="pagging in paggingArr track by $index" ng-click="page.index(pagging)">{{pagging}}</li>' +
-                  '<button  class="btn" ng-click="page.downPage()" ng-disabled="indexPage==model.allpage">下一页</button>' +
-                  '<button  class="btn" ng-click="page.lastPage()" ng-disabled="indexPage==model.allpage">尾页</button>' +
+                  '<button  class="btn" ng-click="page.downPage()" ng-disabled="indexPage==allpage">下一页</button>' +
+                  '<button  class="btn" ng-click="page.lastPage()" ng-disabled="indexPage==allpage">尾页</button>' +
                   '<span>跳页至<input ng-model="goIndex.index" ng-change="changeInputValue()"></span>' +
                   '<button ng-click="page.sure()" class="btn" ng-if="goIndex.index">确定</button>' +
                   '<span>共{{allpage}}页/{{alldata}}条数据</span>' +
@@ -40,12 +40,12 @@
                             i++;
                         }
                     }
-                    $scope.allpage = allModel[3] || 100;
-                    $scope.alldata = allModel[4] || 100;
+                    $scope.allpage = allModel[3];
+                    $scope.alldata = allModel[4];
                     model = allModel[1];
                     url = allModel[2];
-                    allpage = allModel[3] || 100;
-                    alldata = allModel[4] || 100;
+                    allpage = allModel[3];
+                    alldata = allModel[4];
                     pagenum = allModel[5] || 6;
                     ajaxType = allModel[6] || 'get';
                     headAuth = allModel[7] || null;
@@ -75,9 +75,6 @@
                                 case "get":
                                     result.$promise = $http.get(url + $scope.apiCall.mosaic(model));
                                     break;
-                                case "post":
-                                    result.$promise = $http.post(url, model);
-                                    break;
                             }
                             return result.$promise;
                         },
@@ -88,9 +85,9 @@
                                 };
                                 $scope.apiCall.getRequest().success(function (data) {
                                     try{
-                                       $scope.$parent.call(data);
+                                       $rootScope.pageCall(data);
                                      }catch(err){
-                                      console.log(err+'请在父级Scope定义$scope.call()函数');
+                                      console.log(err+'请在父级Scope定义$rootScope.pageCall()函数');
                                      }
                                    
                                 })
@@ -188,12 +185,18 @@
                         }
                     };
                     $scope.changeInputValue = function () {
-                        if ($scope.goIndex.index > allpage) {
-                            $scope.goIndex.index = allpage;
-                        }
-                        if ($scope.goIndex.index < 1) {
-                            $scope.goIndex.index = 1;
-                        }
+                            if ($scope.goIndex.index > allpage) {
+                                $scope.goIndex.index = allpage;
+                            }
+                            if ($scope.goIndex.index < 1) {
+                                $scope.goIndex.index = 1;
+                            }
+                            if ($scope.goIndex.index.match(/\W|[a-z|A-Z]/)) {
+                                $scope.goIndex.index = $scope.goIndex.index.replace(/\W|[a-z|A-Z]/g, '');
+                            }
+                            if ($scope.goIndex.index.match(/\d/)) {
+                                $scope.goIndex.index = parseInt($scope.goIndex.index);
+                            }
                     }
 
                     $scope.page.init();

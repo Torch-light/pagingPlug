@@ -185,12 +185,18 @@
                         }
                     };
                     $scope.changeInputValue = function () {
-                        if ($scope.goIndex.index > allpage) {
-                            $scope.goIndex.index = allpage;
-                        }
-                        if ($scope.goIndex.index < 1) {
-                            $scope.goIndex.index = 1;
-                        }
+                            if ($scope.goIndex.index > allpage) {
+                                $scope.goIndex.index = allpage;
+                            }
+                            if ($scope.goIndex.index < 1) {
+                                $scope.goIndex.index = 1;
+                            }
+                            if ($scope.goIndex.index.match(/\W|[a-z|A-Z]/)) {
+                                $scope.goIndex.index = $scope.goIndex.index.replace(/\W|[a-z|A-Z]/g, '');
+                            }
+                            if ($scope.goIndex.index.match(/\d/)) {
+                                $scope.goIndex.index = parseInt($scope.goIndex.index);
+                            }
                     }
 
                     $scope.page.init();
