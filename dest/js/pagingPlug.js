@@ -9,7 +9,7 @@
                     model: "="
                 },
                 template: '<div class="pagging-div-warp">' +
-                  '<ul class="ul-warp">' +
+                  '<ul class="ul-warp" ng-if="alldata>0">' +
                   '<button  class="btn" ng-click="page.onePage()" ng-disabled="indexPage==1">首页</button>' +
                   '<button  class="btn" ng-click="page.upPage()" ng-disabled="indexPage==1">上一页</button>' +
                   '<li class="num" ng-class={true:"active",false:"notactive"}[pagging==indexPage]  ng-repeat="pagging in paggingArr track by $index" ng-click="page.index(pagging)">{{pagging}}</li>' +
@@ -40,12 +40,12 @@
                             i++;
                         }
                     }
-                    $scope.allpage = allModel[3] || 100;
-                    $scope.alldata = allModel[4] || 100;
+                    $scope.allpage = allModel[3];
+                    $scope.alldata = allModel[4];
                     model = allModel[1];
                     url = allModel[2];
-                    allpage = allModel[3] || 100;
-                    alldata = allModel[4] || 100;
+                    allpage = allModel[3];
+                    alldata = allModel[4];
                     pagenum = allModel[5] || 6;
                     ajaxType = allModel[6] || 'get';
                     headAuth = allModel[7] || null;
@@ -74,9 +74,6 @@
                             switch (ajaxType) {
                                 case "get":
                                     result.$promise = $http.get(url + $scope.apiCall.mosaic(model));
-                                    break;
-                                case "post":
-                                    result.$promise = $http.post(url, model);
                                     break;
                             }
                             return result.$promise;
