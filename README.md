@@ -42,7 +42,7 @@
                 vm.cashiers.Summary = obj.jsondata.list;
                 //obj就是你从后台取到的值。
          }
-      数据动态改变要更新分页就是把$scope.isPageTrue=false然后在设置为true;
+      数据动态改变要更新分页就是把$scope.isPageTrue=false然后取到数据在设置为true;
        $scope.serch = function () {
                 $scope.isPageTrue = false;
                 $scope.pageModel.model.startTime = $scope.model.startTime;
