@@ -25,7 +25,7 @@
                     Authorization: 'Bearer '
                 }  后台有特殊验证的可以加在这里面,没有则为null
                 success:function(data){
-                  //毁掉函数  
+                  //回调  
                 }
 		//这里面的参数名字可以自己更改，但是顺序不能乱。
         };
@@ -40,11 +40,6 @@
       }，
       在你动态改变传给后台的数据模型的时候，记得把
       $scope.pageModel.model里面的值更新,
-      在控制器js里面写上
-        $$rootScope.pageCall = function (obj) {
-                vm.cashiers.Summary = obj.jsondata.list;
-                //obj就是你从后台取到的值。
-         }
       数据动态改变要更新分页就是把$scope.isPageTrue=false然后取到数据在设置为true;
        $scope.serch = function () {
                 $scope.isPageTrue = false;
