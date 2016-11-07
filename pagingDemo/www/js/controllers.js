@@ -10,7 +10,10 @@ angular.module('starter.controllers', [])
     ajaxType:'get', //请求的类型 get post 
     headAuth:{
     Authorization:'Bearer dsadaewdgfsdf'
-    } //请求头，没有则为null
+    }, //请求头，没有则为null
+    success:function(data){
+      console.log(data);
+    }
   };
  
 

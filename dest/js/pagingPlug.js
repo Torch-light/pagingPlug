@@ -84,11 +84,12 @@
                                     $http.defaults.headers.common = headAuth;
                                 };
                                 $scope.apiCall.getRequest().success(function (data) {
-                                    try{
-                                       $rootScope.pageCall(data);
-                                     }catch(err){
-                                      console.log(err+'请在父级Scope定义$rootScope.pageCall()函数');
-                                     }
+                                    try {
+                                        $scope.model.success.call($scope.model,data);
+                                       
+                                    } catch (err) {
+                                        console.log(err + '请定义success函数');
+                                    }
                                    
                                 })
                             }

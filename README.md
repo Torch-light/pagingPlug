@@ -24,6 +24,9 @@
                 headAuth: {
                     Authorization: 'Bearer '
                 }  后台有特殊验证的可以加在这里面,没有则为null
+                success:function(data){
+                  //毁掉函数  
+                }
 		//这里面的参数名字可以自己更改，但是顺序不能乱。
         };
         第一次调用后台数据时
