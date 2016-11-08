@@ -192,10 +192,8 @@
                             if ($scope.goIndex.index < 1) {
                                 $scope.goIndex.index = 1;
                             }
-                            if ($scope.goIndex.index.match(/\W|[a-z|A-Z]/)) {
+                            if (typeof $scope.goIndex.index == "string") {
                                 $scope.goIndex.index = $scope.goIndex.index.replace(/\W|[a-z|A-Z]/g, '');
-                            }
-                            if ($scope.goIndex.index.match(/\d/)) {
                                 $scope.goIndex.index = parseInt($scope.goIndex.index);
                             }
                     }
